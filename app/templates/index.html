@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataClean – GDPR Compliance & Right-to-Erasure Scanner</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 2.5rem; }
+        .card { max-width: 680px; margin: 0 auto; background: #1e293b; padding: 2rem; border-radius: 12px; border: 1px solid #334155; }
+        h1 { margin-top: 0; font-size: 1.5rem; color: #38bdf8; }
+        .badge { display: inline-block; background: #0284c7; color: #fff; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.8rem; margin-bottom: 1rem; }
+        p { color: #cbd5e1; line-height: 1.6; }
+        code { background: #0f172a; padding: 0.2rem 0.4rem; border-radius: 4px; color: #7dd3fc; }
+        .endpoints { margin-top: 1.5rem; border-top: 1px solid #334155; padding-top: 1rem; }
+        a { color: #38bdf8; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <span class="badge">Dockerized Flask API • Read-Only Metadata Scope</span>
+        <h1>DataClean – Automated GDPR Compliance Tool</h1>
+        <p>Privacy-by-design utility automating digital footprint discovery and <strong>GDPR Article 17 (Right to Erasure)</strong> requests using strict OAuth2 metadata scopes (<code>gmail.metadata</code>).</p>
+        <div class="endpoints">
+            <p><strong>Available Endpoints:</strong></p>
+            <ul>
+                <li><a href="/api/status"><code>GET /api/status</code></a> – Container & OAuth2 scope health check</li>
+                <li><a href="/api/scan"><code>GET /api/scan</code></a> – Preview metadata header scan & identified data controllers</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

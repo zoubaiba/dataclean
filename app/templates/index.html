@@ -3,30 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataClean – GDPR Compliance & Right-to-Erasure Scanner</title>
+    <title>DataClean – Take control over your data</title>
     <style>
-        body { font-family: system-ui, -apple-system, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 2.5rem; }
-        .card { max-width: 680px; margin: 0 auto; background: #1e293b; padding: 2rem; border-radius: 12px; border: 1px solid #334155; }
-        h1 { margin-top: 0; font-size: 1.5rem; color: #38bdf8; }
-        .badge { display: inline-block; background: #0284c7; color: #fff; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.8rem; margin-bottom: 1rem; }
-        p { color: #cbd5e1; line-height: 1.6; }
-        code { background: #0f172a; padding: 0.2rem 0.4rem; border-radius: 4px; color: #7dd3fc; }
-        .endpoints { margin-top: 1.5rem; border-top: 1px solid #334155; padding-top: 1rem; }
-        a { color: #38bdf8; text-decoration: none; }
-        a:hover { text-decoration: underline; }
+        :root {
+            --bg: #0b0b0b;
+            --card-bg: #141414;
+            --border: #262626;
+            --text-main: #f5f5f7;
+            --text-muted: #88888b;
+            --accent: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 4rem 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 760px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        .logo {
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            font-size: 1.2rem;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .badge-status {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Grand titre style éditorial */
+        .hero-title {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            margin: 0 0 2rem 0;
+            color: var(--accent);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            max-width: 580px;
+        }
+
+        /* Bouton d'action minimaliste */
+        .btn-primary {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg);
+            padding: 0.9rem 1.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+        }
+
+        .btn-danger {
+            background: transparent;
+            color: #ef4444;
+            border: 1px solid var(--border);
+            padding: 0.9rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+
+        .btn-danger:hover {
+            border-color: #ef4444;
+        }
+
+        /* Section des piliers / chiffres (comme sur l'exemple) */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 6rem;
+            border-top: 1px solid var(--border);
+            padding-top: 3rem;
+        }
+
+        .feature-item span {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            color: var(--text-main);
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Résultats du scan */
+        .results-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .results-card h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        code {
+            color: var(--accent);
+            background: #1f1f23;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <span class="badge">Dockerized Flask API • Read-Only Metadata Scope</span>
-        <h1>DataClean – Automated GDPR Compliance Tool</h1>
-        <p>Privacy-by-design utility automating digital footprint discovery and <strong>GDPR Article 17 (Right to Erasure)</strong> requests using strict OAuth2 metadata scopes (<code>gmail.metadata</code>).</p>
-        <div class="endpoints">
-            <p><strong>Available Endpoints:</strong></p>
+    <div class="wrapper">
+        <header>
+            <div class="logo">DataClean</div>
+            <div class="badge-status">Privacy-by-Design</div>
+        </header>
+
+        <!-- Titre principal demandé -->
+        <h1 class="hero-title">Take control<br>over your data.</h1>
+        <p class="hero-desc">
+            Automate digital footprint discovery and GDPR Article 17 (Right to Erasure) requests securely using restricted metadata scopes without exposing your personal email contents.
+        </p>
+
+        <!-- Actions -->
+        <div>
+            {% if not authenticated %}
+                <a href="/login" class="btn-primary">Connect with Google</a>
+            {% else %}
+                <a href="/scan" class="btn-primary">Run Metadata Scan</a>
+                <a href="/logout" class="btn-danger">Disconnect</a>
+            {% endif %}
+        </div>
+
+        {% if stats %}
+        <div class="results-card">
+            <h3>Identified Data Controllers ({{ stats.identified_data_controllers|length }})</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+                Scanned headers: {{ stats.scanned_headers_count }}
+            </p>
             <ul>
-                <li><a href="/api/status"><code>GET /api/status</code></a> – Container & OAuth2 scope health check</li>
-                <li><a href="/api/scan"><code>GET /api/scan</code></a> – Preview metadata header scan & identified data controllers</li>
+                {% for domain in stats.identified_data_controllers %}
+                    <li><code>{{ domain }}</code> – Ready for automated erasure request.</li>
+                {% endfor %}
             </ul>
+        </div>
+        {% endif %}
+
+        <!-- Blocs de bas de page (style éditorial inspiré de ta maquette) -->
+        <div class="features-grid">
+            <div class="feature-item">
+                <span>01</span>
+                <h3>Least Privilege</h3>
+                <p>Strict isolation utilizing metadata headers only. Zero access to email bodies or personal attachments.</p>
+            </div>
+            <div class="feature-item">
+                <span>02</span>
+                <h3>Article 17 GDPR</h3>
+                <p>Streamlining digital cleanup and automated right-to-erasure workflows across third-party services.</p>
+            </div>
         </div>
     </div>
 </body>

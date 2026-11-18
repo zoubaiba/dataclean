@@ -1,14 +1,26 @@
-from flask import Blueprint, jsonify, session, redirect, url_for, request, render_template
+from flask import Blueprint, jsonify, session, redirect, url_for, render_template
 from app.scanner import simulate_metadata_scan
 
 main_bp = Blueprint('main', __name__)
 
-# Scope strictly limited to metadata (Principle of Least Privilege)
 SCOPES = ['https://www.googleapis.com/auth/gmail.metadata']
 
 @main_bp.route('/')
 def index():
-    return render_template('index.html', authenticated=("credentials" in session))
+    is_auth = "credentials" in session
+    stats = simulate_metadata_scan() if is_auth else None
+    return render_template('index.html', authenticated=is_auth, stats=stats)
+
+@main_bp.route('/login')
+def login():
+    # Simulation de connexion pour valider l'UI en attendant le client OAuth complet
+    session["credentials"] = "active_mock_token"
+    return redirect(url_for('main.index'))
+
+@main_bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('main.index'))
 
 @main_bp.route('/api/status')
 def status():
@@ -21,5 +33,4 @@ def status():
 
 @main_bp.route('/api/scan')
 def scan_preview():
-    results = simulate_metadata_scan()
-    return jsonify(results)
+    return jsonify(simulate_metadata_scan())
